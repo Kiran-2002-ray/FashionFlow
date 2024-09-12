@@ -17,7 +17,7 @@ const contactRoutes = require("./routes/contactRoutes");
 const app = express();
 
 // Use PORT for server port from environment variable, default to 3030
-const port =  3030;
+const port =process.env.PORT||   3030;
 
 connectDB();
 
