@@ -1,0 +1,120 @@
+/* Category Page Styling */
+*{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+body {
+    background-color: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;/* Category Page Styling */
+    * {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+        background-color: #f8f9fa;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        margin: 0;
+    }
+    
+    .container {
+        max-width: 1200px;
+        flex: 1;
+    }
+    
+    h2 {
+        font-size: 2rem;
+        color: #343a40;
+    }
+    
+    #product-list .card {
+        border: 1px solid #dee2e6;
+        border-radius: 0.25rem;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;  /* Smooth transition for hover effect */
+    }
+    
+    #product-list .card img {
+        object-fit: cover;
+        height: 300px;
+        border-radius: 0.25rem 0.25rem 0 0;  /* Rounded corners for the top of the image */
+    }
+    
+    #product-list .card-body {
+        background-color: #ffffff;
+    }
+    
+    .bright-yellow {
+        background-color: #ffc107;
+        color: #ffffff;
+    }
+    
+    .bright-yellow:hover {
+        background-color: #e0a800;
+    }
+    
+    /* Hover effect for cards */
+    #product-list .card:hover {
+        transform: translateY(-10px);  /* Slight lift on hover */
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);  /* Add a shadow effect on hover */
+    }
+    
+    /* Footer styling */
+    footer {
+        background-color: black;
+        color: white;
+        padding: 20px;
+        text-align: center;
+        position: relative;
+        bottom: 0;
+        width: 100%;
+        margin-top: auto;
+    }
+    
+}
+
+.container {
+    max-width: 1200px;
+    flex: 1; 
+}
+h2 {
+    font-size: 2rem;
+    color: #343a40;
+}
+
+#product-list .card {
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+}
+
+#product-list .card img {
+    object-fit: cover;
+    height: 200px;
+}
+
+#product-list .card-body {
+    background-color: #ffffff;
+}
+
+.bright-yellow {
+    background-color: #ffc107;
+    color: #ffffff;
+}
+
+.bright-yellow:hover {
+    background-color: #e0a800;
+}
+
+
+footer {
+    background-color: black;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    margin-top: auto; 
+}

@@ -1,0 +1,33 @@
+/* Checkout Page Styling */
+*{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+body {
+    background-color: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin-bottom: 15px;
+    flex: 1;
+}
+
+h2 {
+    font-size: 2rem;
+    color: #343a40;
+}
+
+#card-element {
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    padding: 10px;
+}
+
+#card-errors {
+    color: #dc3545;
+}
+

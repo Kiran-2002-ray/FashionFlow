@@ -1,0 +1,26 @@
+.container {
+  max-width: 900px;
+  flex: 1; 
+}
+
+h2 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.lead {
+  font-size: 1.25rem;
+  margin-bottom: 20px;
+  color: #555;
+}
+
+p {
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.6;
+}
+
+.text-center {
+  text-align: center;
+}

@@ -1,0 +1,45 @@
+<!-- navbar.html -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand d-flex align-items-center" href="#">
+        <img src="./images/fflogo1.jpeg" id="nav-logo" alt="FashionFlow Logo" />
+        <span class="ms-2">FashionFlow</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+            <!-- Existing nav items -->
+            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categories</a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="/category.html?category=Men">Men</a></li>
+                    <li><a class="dropdown-item" href="/category.html?category=Women">Women</a></li>
+                    <li><a class="dropdown-item" href="/category.html?category=Children">Children</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    
+                </ul>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
+            <li class="nav-item"><a class="nav-link" href="about.html"">About Us</a></li>
+            <li class="nav-item"><a class="nav-link" href="cart.html">Cart</a></li>
+            <li class="nav-item"><a class="nav-link" href="orders.html">orders</a></li>
+            <li class="nav-item logout-nav-item">
+                <button class="btn btn-warning" onclick="handleLogout()">Logout</button>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<style>
+    /* Change the color of the navbar-toggler-icon to white */
+    .custom-toggler .navbar-toggler-icon {
+    background-image: url('data:image/svg+xml;charset=UTF8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="white" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E');
+  }
+    
+    /* Optionally, change the background color of the toggler button */
+    .navbar-light .navbar-toggler {
+      background-color: rgba(239, 243, 243, 0.998);
+    }
+  </style>

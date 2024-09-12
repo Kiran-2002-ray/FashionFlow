@@ -1,0 +1,79 @@
+/* General Styles for Order History Page */
+*{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+body {
+    background-color: #f5f5f5; 
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    
+    /* Consistent light background color */
+}
+
+.container {
+   
+    max-width: 900px;
+    flex: 1; 
+    
+    /* border-radius: 8px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    padding: 30px;
+    margin-top: 20px; 
+    */
+}
+
+h1 {
+    font-size: 2.5rem; /* Consistent font size for headings */
+    font-weight: 700; /* Bold font weight */
+    color: #333; /* Dark text color for readability */
+    margin-bottom: 20px; /* Space below the heading */
+}
+
+.table {
+    margin-top: 20px;
+    border-radius: 8px; /* Rounded corners for the table */
+    overflow: hidden; /* Ensure rounded corners are visible */
+}
+
+.table thead {
+    background-color: #007bff; /* Blue background for table header */
+    color: white; /* White text color for table header */
+}
+
+.table th, .table td {
+    text-align: center; /* Center align the text in table cells */
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f9f9f9; /* Slightly darker gray for odd rows */
+}
+
+.table tbody tr:hover {
+    background-color: #f1f1f1; /* Light gray background on hover for rows */
+}
+
+.table td {
+    padding: 12px; /* Consistent padding for table cells */
+}
+
+.table-responsive {
+    overflow-x: auto; /* Make sure the table is scrollable on small screens */
+}
+
+.alert {
+    margin-top: 20px; /* Space above the alert message */
+    padding: 15px; /* Padding for alert messages */
+    border-radius: 8px; /* Rounded corners for alert messages */
+}
+
+.alert-danger {
+    background-color: #f8d7da; /* Light red background for error messages */
+    color: #721c24; /* Dark red text color */
+}
+
+.alert-success {
+    background-color: #d4edda; /* Light green background for success messages */
+    color: #155724; /* Dark green text color */
+}

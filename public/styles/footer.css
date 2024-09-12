@@ -1,0 +1,36 @@
+/* Basic footer styling */
+*{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.footer {
+    background-color: #000000; /* Black background color */
+    color: #ffffff; /* White text color */
+    border-top: 1px solid #444444; /* Dark border at the top for contrast */
+    padding: 20px 0; /* Add some padding for better spacing */
+  }
+  
+  .footer p {
+    margin: 0;
+    font-size: 14px;
+  }
+  
+  .footer a {
+    color: #007bff; /* Primary color for links */
+    text-decoration: none;
+  }
+  
+  .footer a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .footer {
+      text-align: center;
+    }
+  
+    .footer .col-md-6 {
+      margin-bottom: 10px;
+    }
+  }
+  

@@ -1,0 +1,64 @@
+/* General Styling */
+* {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Navbar Styling */
+.navbar {
+  padding: 0.9rem 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: rgb(10, 10, 32) !important;  /* Force dark background for the navbar */
+}
+
+.navbar-brand,
+.navbar-nav .nav-link {
+  color: #ffffff !important;  /* Force white text color */
+}
+
+.navbar-nav .nav-link:hover {
+  background-color: rgb(10, 10, 32) !important;  /* Force darker gray for hover effect */
+  color: #ffc107 !important;  /* Force bright yellow color on hover */
+  border-radius: 0.25rem;
+}
+
+.dropdown-menu {
+  border-radius: 0.25rem;
+  background-color: #ffffff;  /* White background for dropdown */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-item {
+  color: rgb(10, 10, 32) !important;  /* Force dark text color */
+}
+
+.dropdown-item:hover {
+  background-color: #f8f9fa !important;  /* Light gray background on hover */
+  color: rgb(10, 10, 32) !important;  /* Force dark text color on hover */
+}
+
+.btn-warning {
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
+  background-color: #ffc107 !important;  /* Force bright yellow */
+  color: rgb(10, 10, 32) !important;  /* Force dark text color */
+}
+
+.btn-warning:hover {
+  background-color: #e0a800 !important;  /* Force darker yellow on hover */
+  color: #ffffff !important;  /* Force white text color on hover */
+}
+
+.navbar-brand:hover {
+  color: #ffc107 !important;  /* Force bright yellow on hover */
+}
+
+#nav-logo {
+  width: 50px;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+#nav-logo:hover {
+  transform: scale(1.1);
+}

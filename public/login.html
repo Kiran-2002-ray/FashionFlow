@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login #07</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="styles/login.css"> <!-- Link to login-specific CSS -->
+  <script src="javascript/navbar.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="javascript/login.js" defer></script> <!-- Separate JS file for login logic -->
+</head>
+
+<body>
+  <div class="login-container">
+    <div class="login-box">
+      <!-- Login Form -->
+      <div class="left" id="loginFormContainer">
+        <form id="loginForm">
+          <h2>Log In</h2>
+          <div class="form-group">
+            <input type="text" id="username" class="form-control" placeholder="Username" required />
+          </div>
+          <div class="form-group">
+            <input type="password" id="password" class="form-control" placeholder="Password" required />
+          </div>
+          <div class="form-group form-check remember-me">
+            <input type="checkbox" class="form-check-input" id="rememberMe" />
+            <label class="form-check-label" for="rememberMe">Remember Me</label>
+          </div>
+          <button type="submit" class="btn btn-block" id="btn1">Sign In</button>
+          <a href="#" class="forgot-password">Forgot Password</a>
+        </form>
+      </div>
+
+      <!-- Forgot Password Form -->
+      <div class="left" id="forgotPasswordContainer">
+        <h2>Forgot Password</h2>
+        <form id="forgotPasswordForm">
+          <div class="form-group">
+            <input type="email" id="forgotEmail" class="form-control" placeholder="Enter your email" required />
+          </div>
+          <button type="submit" class="btn btn-block" id="btnForgotPassword">
+            Send Verification Code
+          </button>
+        </form>
+        <a href="#" id="backToLogin">Back to Login</a>
+      </div>
+
+      <!-- Reset Password Form -->
+      <div class="left" id="resetPasswordContainer">
+        <h2>Reset Password</h2>
+        <form id="resetPasswordForm">
+          <div class="form-group">
+            <input type="email" id="resetEmail" class="form-control" placeholder="Enter your email" required />
+          </div>
+          <div class="form-group">
+            <input type="text" id="verificationCode" class="form-control" placeholder="Enter verification code"
+              required />
+          </div>
+          <div class="form-group">
+            <input type="password" id="newPassword" class="form-control" placeholder="Enter new password" required />
+          </div>
+          <button type="submit" class="btn btn-block" id="btnResetPassword">
+            Reset Password
+          </button>
+        </form>
+        <a href="#" id="backToLoginFromReset">Back to Login</a>
+      </div>
+
+      <!-- Right Side with Welcome Message -->
+      <div class="right">
+        <h2>Welcome to Login</h2>
+        <p>Don't have an account?</p>
+        <a href="/signup.html" class="btn">Sign Up</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

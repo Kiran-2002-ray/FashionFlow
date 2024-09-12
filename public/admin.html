@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - FashionFlow</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles/admin.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .sidebar {
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 250px;
+      background-color: #343a40;
+      color: white;
+      padding-top: 20px;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .sidebar h3 {
+      color: #f8f9fa;
+    }
+
+    .sidebar a {
+      padding: 10px 15px;
+      display: block;
+      color: #f8f9fa;
+      text-decoration: none;
+    }
+
+    .sidebar a:hover {
+      background-color: #495057;
+    }
+
+    .main-content {
+      margin-left: 250px;
+      padding: 20px;
+    }
+
+    .container {
+      margin-top: 20px;
+    }
+
+    .bright-yellow {
+      background-color: #ffc107;
+      color: black;
+    }
+
+    .bright-blue {
+      background-color: #007bff;
+      color: white;
+    }
+
+    h1 {
+      padding: 20px;
+      color: #343a40;
+    }
+
+    .btn {
+      margin-top: 10px;
+    }
+
+    .admin-header {
+      background-color: #007bff;
+      color: white;
+      padding: 10px;
+    }
+
+    .modal-body input,
+    .modal-body select {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="sidebar">
+    <h3 class="text-center">Admin Dashboard</h3>
+    <a href="#manage-products">Manage Products</a>
+    <a href="#manage-categories">Manage Categories</a>
+    <a href="#manage-users">Manage Users</a>
+    <a href="#manage-orders">Manage Orders</a>
+  </div>
+
+  <div class="main-content">
+    <header class="admin-header">
+      <div class="container d-flex justify-content-between align-items-center">
+        <span>FashionFlow Admin Panel</span>
+        <div>
+          <button class="btn btn-light me-2" onclick="window.location.href='./index.html'">Home</button>
+          <button class="btn btn-light" onclick="handleLogout()">Logout</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="container mt-4">
+      <h1 class="text-primary mb-4">Dashboard</h1>
+
+      <!-- Manage Products Section -->
+      <section id="manage-products">
+        <h2 class="section-title">Manage Products</h2>
+        <button class="btn btn-warning mb-3" data-bs-toggle="modal" data-bs-target="#addProductModal">Add New
+          Product</button>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Category</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="productTableBody">
+            <!-- Dynamic rows will be populated by JavaScript -->
+          </tbody>
+        </table>
+        <button class="btn btn-secondary" onclick="fetchProducts()">Show Products</button>
+        <button class="btn btn-secondary" onclick="refreshPage()">Close</button>
+      </section>
+
+      <!-- Manage Categories Section -->
+      <section id="manage-categories" class="mt-5">
+        <h2 class="section-title">Manage Categories</h2>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+            </tr>
+          </thead>
+          <tbody id="categoryTableBody">
+            <!-- Dynamic rows will be populated by JavaScript -->
+          </tbody>
+        </table>
+        <button class="btn btn-secondary" onclick="fetchCategories()">Show Categories</button>
+        <button class="btn btn-secondary" onclick="refreshPage()">Close</button>
+      </section>
+
+      <!-- Manage Users Section -->
+      <section id="manage-users" class="mt-5">
+        <h2 class="section-title">Manage Users</h2>
+        <button class="btn btn-warning mb-3" data-bs-toggle="modal" data-bs-target="#addUserModal">Add New User</button>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="userTableBody">
+            <!-- Dynamic rows will be populated by JavaScript -->
+          </tbody>
+        </table>
+        <button class="btn btn-secondary" onclick="fetchUsers()">Show Users</button>
+        <button class="btn btn-secondary" onclick="refreshPage()">Close</button>
+      </section>
+
+      <!-- Manage Orders Section -->
+      <section id="manage-orders" class="mt-5">
+        <h2 class="section-title">Manage Orders</h2>
+        <button class="btn btn-warning mb-3" data-bs-toggle="modal" onclick="fetchAllOrders()">View all Orders</button>
+        <button class="btn btn-secondary" onclick="refreshPage()">Close</button>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Total Price</th>
+              <th>Status</th>
+              <th>Shipping Address</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody id="orderTableBody">
+            <!-- Dynamic rows will be populated by JavaScript -->
+          </tbody>
+        </table>
+      </section>
+    </div>
+  </div>
+
+  <!-- Add New Product Modal -->
+  <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addProductModalLabel">Add New Product</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="addProductForm">
+            <div class="mb-3">
+              <label for="productName" class="form-label">Product Name</label>
+              <input type="text" class="form-control" id="productName" required>
+            </div>
+            <div class="mb-3">
+              <label for="productDescription" class="form-label">Description</label>
+              <textarea class="form-control" id="productDescription" rows="3" required></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="productPrice" class="form-label">Price</label>
+              <input type="number" class="form-control" id="productPrice" required step="0.01">
+            </div>
+            <div class="mb-3">
+              <label for="productQuantity" class="form-label">Quantity</label>
+              <input type="number" class="form-control" id="productQuantity" required>
+            </div>
+            <div class="mb-3">
+              <label for="productCategory" class="form-label">Category</label>
+              <select class="form-select" id="productCategory" required>
+                <option value="Men">Men</option>
+                <option value="Women">Women</option>
+                <option value="Children">Children</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="productImages" class="form-label">Image URLs (comma-separated)</label>
+              <input type="text" class="form-control" id="productImages">
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add New Category Modal -->
+  <div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addCategoryModalLabel">Add New Category</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="addCategoryForm">
+            <div class="mb-3">
+              <label for="categoryName" class="form-label">Category Name</label>
+              <input type="text" class="form-control" id="categoryName" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add New User Modal -->
+  <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addUserModalLabel">Add New User</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="addUserForm">
+            <!-- User Name Field -->
+            <div class="mb-3">
+              <label for="userName" class="form-label">User Name</label>
+              <input type="text" class="form-control" id="userName" required>
+            </div>
+            
+            <!-- User Email Field -->
+            <div class="mb-3">
+              <label for="userEmail" class="form-label">Email</label>
+              <input type="email" class="form-control" id="userEmail" required>
+            </div>
+            
+            <!-- User Password Field (Newly Added) -->
+            <div class="mb-3">
+              <label for="userPassword" class="form-label">Password</label>
+              <input type="password" class="form-control" id="userPassword" required>
+            </div>
+            
+            <!-- User Role Field -->
+            <div class="mb-3">
+              <label for="userRole" class="form-label">Role</label>
+              <select class="form-select" id="userRole" required>
+                <option value="admin">Admin</option>
+                <option value="user">User</option>
+              </select>
+            </div>
+            
+            <!-- Save Button -->
+            <button type="submit" class="btn btn-primary">Save</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  <!-- Edit Product Modal -->
+  <div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editProductModalLabel">Edit Product</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="editProductForm">
+            <div class="mb-3">
+              <label for="editProductName" class="form-label">Product Name</label>
+              <input type="text" class="form-control" id="editProductName" required>
+            </div>
+            <div class="mb-3">
+              <label for="editProductDescription" class="form-label">Description</label>
+              <textarea class="form-control" id="editProductDescription" rows="3" required></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="editProductPrice" class="form-label">Price</label>
+              <input type="number" class="form-control" id="editProductPrice" required step="0.01">
+            </div>
+            <div class="mb-3">
+              <label for="editProductQuantity" class="form-label">Quantity</label>
+              <input type="number" class="form-control" id="editProductQuantity" required>
+            </div>
+            <div class="mb-3">
+              <label for="editProductCategory" class="form-label">Category</label>
+              <select class="form-select" id="editProductCategory" required>
+                <option value="Men">Men</option>
+                <option value="Women">Women</option>
+                <option value="Children">Children</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="editProductImages" class="form-label">Image URLs (comma-separated)</label>
+              <input type="text" class="form-control" id="editProductImages">
+            </div>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Axios JS -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <!-- JavaScript Code -->
+  <script>
+
+    function handleLogout() {
+      localStorage.removeItem('token');
+      window.location.href = 'login.html';
+    }
+
+    // Refresh Page
+    function refreshPage() {
+      location.reload();
+    }
+
+    // Fetch Products
+    async function fetchProducts() {
+      const token = localStorage.getItem('token');
+
+      try {
+        const response = await axios.get('/api/admin/products', {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
+        const products = response.data;
+        const productTableBody = document.getElementById('productTableBody');
+        productTableBody.innerHTML = '';
+
+        products.forEach(product => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${product._id}</td>
+            <td>${product.name}</td>
+            <td>${product.description}</td>
+            <td>${product.price}</td>
+            <td>${product.quantity}</td>
+            <td>${product.category}</td>
+            <td>
+              <button class="btn btn-sm btn-primary" onclick="editProduct('${product._id}')">Edit</button>
+              <button class="btn btn-sm btn-danger" onclick="deleteProduct('${product._id}')">Delete</button>
+            </td>
+          `;
+          productTableBody.appendChild(row);
+        });
+      } catch (error) {
+        console.error('Error fetching products:', error.response ? error.response.data : error.message);
+      }
+    }
+
+
+
+    async function addProduct() {
+      const token = localStorage.getItem('token');
+
+      const newProductData = {
+        name: document.getElementById('productName').value,
+        description: document.getElementById('productDescription').value,
+        price: parseFloat(document.getElementById('productPrice').value),
+        quantity: parseInt(document.getElementById('productQuantity').value, 10),
+        category: document.getElementById('productCategory').value,
+        image_urls: document.getElementById('productImages').value.split(',')
+      };
+
+      try {
+        await axios.post('/api/admin/addProducts', newProductData, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        });
+
+        // Close the modal after adding the product
+        const addProductModal = bootstrap.Modal.getInstance(document.getElementById('addProductModal'));
+        addProductModal.hide();
+
+        // Refresh product list
+        fetchProducts();
+
+      } catch (error) {
+        console.error('Error adding product:', error.response ? error.response.data : error.message);
+      }
+    }
+
+    // Attach the function to the form submission
+    document.getElementById('addProductForm').onsubmit = function (e) {
+      e.preventDefault(); // Prevent the default form submission
+      addProduct(); // Call the addProduct function
+    };
+
+    // Edit Product
+    async function editProduct(productId) {
+      const token = localStorage.getItem('token');
+
+      try {
+        const response = await axios.get(`/api/admin/products/${productId}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
+        const product = response.data;
+        console.log(product.data)
+
+        // Populate the modal with product details
+        document.getElementById('editProductName').value = product.name;
+        document.getElementById('editProductDescription').value = product.description;
+        document.getElementById('editProductPrice').value = product.price;
+        document.getElementById('editProductQuantity').value = product.quantity;
+        document.getElementById('editProductCategory').value = product.category;
+        document.getElementById('editProductImages').value = product.image_urls.join(',');
+
+        // Show the modal
+        const editProductModal = new bootstrap.Modal(document.getElementById('editProductModal'));
+        editProductModal.show();
+
+        // Handle form submission
+        document.getElementById('editProductForm').onsubmit = async function (e) {
+          e.preventDefault();
+
+          const updatedProductData = {
+            name: document.getElementById('editProductName').value,
+            description: document.getElementById('editProductDescription').value,
+            price: parseFloat(document.getElementById('editProductPrice').value),
+            quantity: parseInt(document.getElementById('editProductQuantity').value, 10),
+            category: document.getElementById('editProductCategory').value,
+            image_urls: document.getElementById('editProductImages').value.split(',')
+          };
+
+          try {
+            await axios.put(`/api/admin/products/${productId}`, updatedProductData, {
+              headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+              }
+            });
+
+            editProductModal.hide();
+            fetchProducts();
+          } catch (error) {
+            console.error('Error updating product:', error.response ? error.response.data : error.message);
+          }
+        };
+
+      } catch (error) {
+        console.error('Error fetching product details:', error.response ? error.response.data : error.message);
+      }
+    }
+
+    // Delete Product
+    async function deleteProduct(productId) {
+      const token = localStorage.getItem('token');
+
+      try {
+        await axios.delete(`/api/admin/products/${productId}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
+        fetchProducts();
+      } catch (error) {
+        console.error('Error deleting product:', error.response ? error.response.data : error.message);
+      }
+    }
+
+    // Fetch Categories
+    async function fetchCategories() {
+      const token = localStorage.getItem('token');
+      try {
+        const response = await axios.get('/api/admin/categories', {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
+        const categories = response.data;
+        const categoryTableBody = document.getElementById('categoryTableBody');
+        categoryTableBody.innerHTML = '';
+
+        categories.forEach(category => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${category}</td>
+            <td>${category}</td>
+          `;
+          categoryTableBody.appendChild(row);
+        });
+      } catch (error) {
+        console.error('Error fetching categories:', error.response ? error.response.data : error.message);
+      }
+    }
+
+    // Fetch Users
+    async function fetchUsers() {
+      const token = localStorage.getItem('token');
+
+      try {
+        const response = await axios.get('/api/admin/users', {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
+        const users = response.data;
+        console.log(users);
+        const userTableBody = document.getElementById('userTableBody');
+        userTableBody.innerHTML = '';
+
+        users.forEach(user => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${user._id}</td>
+            <td>${user.username}</td>
+            <td>${user.email}</td>
+            <td>${user.role}</td>
+            <td>
+              <button class="btn btn-sm btn-danger" onclick="deleteUser('${user._id}')">Delete</button>
+            </td>
+          `;
+          userTableBody.appendChild(row);
+        });
+      } catch (error) {
+        console.error('Error fetching users:', error.response ? error.response.data : error.message);
+      }
+    }
+
+
+    async function addUser() {
+      const token = localStorage.getItem('token');
+
+      const newUserData = {
+        username: document.getElementById('userName').value,
+        email: document.getElementById('userEmail').value,
+        role: document.getElementById('userRole').value,
+        password:document.getElementById('userPassword').value
+      };
+
+      try {
+        await axios.post('/api/admin/addUsers', newUserData, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        });
+
+        // Close the modal after adding the user
+        const addUserModal = bootstrap.Modal.getInstance(document.getElementById('addUserModal'));
+        addUserModal.hide();
+
+        // Refresh user list
+        fetchUsers();
+
+      } catch (error) {
+        console.error('Error adding user:', error.response ? error.response.data : error.message);
+      }
+    }
+
+    // Attach the function to the form submission
+    document.getElementById('addUserForm').onsubmit = function (e) {
+      e.preventDefault(); // Prevent the default form submission
+      addUser(); // Call the addUser function
+    };
+
+
+    // Delete User
+    async function deleteUser(userId) {
+      const token = localStorage.getItem('token');
+      try {
+        await axios.delete(`/api/admin/users/${userId}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
+        fetchUsers();
+      } catch (error) {
+        console.error('Error deleting user:', error.response ? error.response.data : error.message);
+      }
+    }
+
+    async function fetchAllOrders(params) {
+      const token = localStorage.getItem('token');
+      try {
+        const response = await axios.get('/api/admin/orders', {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        const orders = response.data;
+        const orderTableBody = document.getElementById('orderTableBody');
+        orderTableBody.innerHTML = '';
+
+        orders.forEach(order => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+                            <td>${order._id}</td>
+                            <td>Rs.${order.total_price}</td>
+                            <td>${order.status}</td>
+                            <td>${order.shipping_address.street}, ${order.shipping_address.city}, ${order.shipping_address.state}, ${order.shipping_address.zip}, ${order.shipping_address.country}</td>
+                            <td>${new Date(order.createdAt).toLocaleDateString()}</td>`;
+
+          orderTableBody.appendChild(row);
+
+        })
+
+
+        console.log(orders);
+
+      } catch (error) {
+        console.error('Error fetching orders:', error.response ? error.response.data : error.message);
+      }
+    }
+
+  </script>
+</body>
+
+</html>
