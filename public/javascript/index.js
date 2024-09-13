@@ -73,6 +73,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   
   document.addEventListener("DOMContentLoaded", () => {
     const token = localStorage.getItem('token'); // Assuming you store a token after login
+    console.log(token);
     
     if (!token) {
       // Redirect to login page if no token is found
