@@ -71,3 +71,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   });
   
+  document.addEventListener("DOMContentLoaded", () => {
+    const token = localStorage.getItem('token'); // Assuming you store a token after login
+    
+    if (!token) {
+      // Redirect to login page if no token is found
+      window.location.href = '/login.html';
+    } else {
+      // Proceed with loading the page content (like fetching products, etc.)
+      loadPageContent();
+    }
+  });
+  
+  function loadPageContent() {
+    // Your existing code to load the products or other content
+  }
+  
